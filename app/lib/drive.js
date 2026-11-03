@@ -1,0 +1,14 @@
+import { google } from "googleapis";
+
+const clientEmail = process.env.GOOGLE_DRIVE_CLIENT_EMAIL;
+const privateKey = process.env.GOOGLE_DRIVE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    client_email: clientEmail,
+    private_key: privateKey,
+  },
+  scopes: ["https://www.googleapis.com/auth/drive.file"],
+});
+
+export const drive = google.drive({ version: "v3", auth });
